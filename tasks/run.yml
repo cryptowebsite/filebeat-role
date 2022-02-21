@@ -1,0 +1,10 @@
+---
+- name: Run Filebeat
+  shell: /usr/share/filebeat/bin/filebeat -e -c /usr/share/filebeat/filebeat.yml >/dev/null 2>&1 &
+  args:
+    chdir: /usr/share/filebeat/
+    executable: /bin/bash
+  become_method: su
+  become: yes
+  register: run_filebeat
+  changed_when: "run_filebeat.rc != 0"

@@ -1,8 +1,29 @@
 ---
 - name: Configure Filebeat
   become: true
+  become_method: su
   template:
     src: filebeat.yml.j2
-    mode: 0644
-    dest: /etc/filebeat/filebeat.yml
-  notify: restart Filebeat
+    mode: 0740
+#    owner: filebeat-user
+    dest: /usr/share/filebeat/filebeat.yml
+  register: configure_kibana
+  changed_when: "configure_kibana.failed != false"
+#- name: Change owner filebeat directory
+#  file:
+#    name: /usr/share/filebeat/
+#    recurse: true
+#    owner: filebeat-user
+#    mode: 0740
+#  register: owner_filebeat
+#  changed_when: "owner_filebeat.failed != false"
+
+
+#- name: Change owner filebeat etc directory
+#  file:
+#    name: /etc/filebeat/
+#    recurse: true
+#    owner: filebeat-user
+#    mode: 0740
+#  register: owner_filebeat_etc
+#  changed_when: "owner_filebeat_etc.failed != false"

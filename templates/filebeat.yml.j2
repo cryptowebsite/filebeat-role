@@ -1,4 +1,20 @@
 output.elasticsearch:
-    hosts: ["http://{{ hostvars['el-centos']['ansible_host'] }}:9200"]
-setup.kibana.host: "http://{{ hostvars['kbn-centos']['ansible_host'] }}:5601"
+    hosts: ["http://localhost:9200"]
+
+setup.kibana.host: "http://localhost:5601"
+
 filebeat.config.modules.path: ${path.config}/modules.d/*.yml
+
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat
+  keepfiles: 7
+  permissions: 0644
+
+filebeat.inputs:
+- type: http_endpoint
+  enabled: true
+  listen_address: 0.0.0.0
+  listen_port: 8080

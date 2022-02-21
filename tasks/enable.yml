@@ -1,6 +1,7 @@
 ---
 - name: Set filebeat systemwork
   become: true
+  become_method: su
   command:
     cmd: filebeat modules enable system
     chdir: /usr/share/filebeat/bin

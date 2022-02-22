@@ -1,8 +1,9 @@
 galaxy_info:
   author: Aleksandr Khaikin
-  description: kinaba filebeat-role
+  description: Filebeat role
   company: netology
   role_name: filebeat_role
+  namespace: cryptodeveloper
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
